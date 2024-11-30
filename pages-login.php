@@ -1,3 +1,6 @@
+
+<?php require 'config/db.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,10 +32,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-
   <main>
     <div class="container">
-
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
@@ -44,16 +45,40 @@
                   <span class="d-none d-lg-block">LMS</span>
                 </a>
               </div><!-- End Logo -->
-
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
+                  <?php 
+                    if(isset($_POST['save'])) {
+                      $username = $_POST['username'];
+                      $password = $_POST['password'];
 
-                  <form class="row g-3 needs-validation" novalidate>
+                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' ");
+                      $user = mysqli_fetch_array($select);
+                      
+                      if($user) {
+                        if(password_verify($password, $user['password'])) {
+                          echo "<div class='alert alert-sucess'>Login sucessfully!</div>";
+                          header("Location: index.php");
+                          exit;
+                        } else {
+                          echo "<div class='alert alert-warning'>Password Incorrect</div>";
+                        }
+                      } else {
+                        echo "<div class='alert alert-danger'>User not found!</div>";
+                        header("Location: pages-register.php");
+                        exit;
+                      }
 
+                      // setcookie('Username', $username, time() + (86400 * 30), "/");
+                    }
+                  ?>
+                  <form class="row g-3 needs-validation"
+                  method="POST"
+                  >
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
@@ -76,7 +101,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit"><a href="index.php">Login</a></button>
+                      <button class="btn btn-primary w-100" name="save" type="submit">Login</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="pages-register.php">Create an account</a></p>

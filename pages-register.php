@@ -46,21 +46,25 @@
                 </a>
               </div>
               <?php 
-                if($_SERVER["REQUEST_METHOD"] === "POST") {
-                    $name = $_POST['name'];
-                    $uname = $_POST['username'];
-                    $password = $_POST['password'];
-                    $role = $_POST['role'];
+                if($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $name = $_POST["name"];
+                    $uname = $_POST["username"];
+                    $eamil = $_POST["email"];
+                    $password = $_POST["password"];
+                    $role = $_POST["role"];
 
+
+                    //validation the form
                     if(!empty($name) && !empty($uname) && !empty($password) && !empty($role)) {
-                      $EnPassword = password_hash($password, PASSWORD_BCRYPT);
-                      $insert = "INSERT INTO users(name, username, password, role) VALUES($name, $uname, $EnPassword, $role)";
+                      $Epassword = password_hash($password, PASSWORD_BCRYPT);         //Encrypt the password
+                      $insert = "INSERT INTO users(name, username,email,  password, role) VALUES('$name', '$uname', '$eamil' ,'$Epassword', '$role')";
                       if(mysqli_query($conn, $insert)) {
                           ?>
-                          <div class="alert alert-success alert-dismissible fade show " role="alert">
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Register Sucessfully!
                           </div>
                           <?php
+                          header("Location: index.php");
                       } else {
                         ?>
                         <div class="alert alert-warning" role="alert">
@@ -76,7 +80,6 @@
                      <?php
                     }
                 }
-
                 $conn -> close();
               ?>
 
@@ -89,7 +92,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate
+                  <form class="row g-3 needs-validation"
                   method="POST"
                   >
                     <div class="col-12">
@@ -99,11 +102,16 @@
                     </div>
 
                     <div class="col-12">
+                      <label for="yourRole" class="form-label">Your Role</label>
+                      <input type="text" name="role" class="form-control" id="yourRole" required>
+                      <div class="invalid-feedback">Please enter you role!</div>
+                    </div>
+
+                    <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
-
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
