@@ -65,7 +65,7 @@
                           header("Location: index.php");
                           exit;
                         } else {
-                          echo "<div class='alert alert-warning'>Password Incorrect</div>";
+                          echo "<div class='alert alert-warning'>Incorrect Password</div>";
                         }
                       } else {
                         echo "<div class='alert alert-danger'>User not found!</div>";
