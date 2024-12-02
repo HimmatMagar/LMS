@@ -53,17 +53,25 @@
                   </div>
                   <?php 
                     if(isset($_POST['save'])) {
+                      //user's input
                       $username = $_POST['username'];
                       $password = $_POST['password'];
 
-                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' ");
-                      $user = mysqli_fetch_array($select);
+                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' "); // select the username form database
+                      $user = mysqli_fetch_array($select); // fetching a row from select variable
                       
                       if($user) {
                         if(password_verify($password, $user['password'])) {
                           echo "<div class='alert alert-sucess'>Login sucessfully!</div>";
                           header("Location: index.php");
                           exit;
+                          // if($user['role'] == 'admin') {
+                          //   header("Location: adminDashboard.php");
+                          //   exit;
+                          // } else {
+                          //   header("Location: studentDashboard.php");
+                          //   exit;
+                          // }
                         } else {
                           echo "<div class='alert alert-warning'>Incorrect Password</div>";
                         }
@@ -73,8 +81,13 @@
                         exit;
                       }
 
-                      // setcookie('Username', $username, time() + (86400 * 30), "/");
+                      // Set the cookie for 'Remember Me' functionality
+                      if(isset($_COOKIE['remember'])) {
+                        // Use the HttpOnly and Secure flags for cookie security
+                        setcookie('Username', $username, time() + 86400, "/"); //86400 = 1 day
+                      }
                     }
+                    $conn -> close();
                   ?>
                   <form class="row g-3 needs-validation"
                   method="POST"
