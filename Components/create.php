@@ -1,6 +1,5 @@
 <?php require '../include/head.php'; ?>
 <body>
-  <!-- ======= Header ======= -->
 <?php require '../include/header.php'; ?>
 
   <!-- ======= Sidebar ======= -->
@@ -8,87 +7,54 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Form Layouts</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Forms</li>
-          <li class="breadcrumb-item active">Layouts</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-        <div class="col-lg-6">
+    <section>
+      <div class="container w-50 p-5 rounded-3 shadow">
+      <form
+      class="row g-3"
+      method="POST">
+      <h1 class="text-center">Add Course</h1>
+      <?php 
+            #Database connection
+            $conn = new mysqli("localhost", "root", "", "lms");
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Floating labels Form</h5>
+            #Adding course
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+              $title = $_POST['title'] ?? '';
+              $desc = $_POST['description'] ?? '';
+              $duration = $_POST['duration'] ?? '';
 
-              <!-- Floating Labels Form -->
-              <form class="row g-3">
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                    <label for="floatingName">Your Name</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email">
-                    <label for="floatingEmail">Your Email</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
-                </div>
+              if(!empty($title) && !empty($desc) && !empty($duration)) {
+                $insertQuery = "INSERT INTO courses(title, description, duration) VALUES('$title', '$desc', '$duration')";
+                if(mysqli_query($conn, $insertQuery)) {
+                  echo "<div class='alert alert-success' role='alert'>Course added successfully!!</div>";
+                } else {
+                  echo "<div class='alert alert-warning' role='alert'>Something Error....</div>";
+                }
+              } else {
+                echo "<div class='alert alert-warning' role='alert'>All fields are required</div>";
+              }
+            }
+
+            #Connection close
+            $conn -> close();
+          ?>
                 <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
-                    <label for="floatingTextarea">Address</label>
-                  </div>
+                  <label for="inputNanme4" class="form-label">Course Name</label>
+                  <input type="text" class="form-control" name="title" placeholder="Enter your course title" id="inputNanme4" required>
                 </div>
-                <div class="col-md-6">
-                  <div class="col-md-12">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingCity" placeholder="City">
-                      <label for="floatingCity">City</label>
-                    </div>
-                  </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                  <textarea class="form-control" placeholder="Enter your course description" name="description" id="exampleFormControlTextarea1" rows="5" required></textarea>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="State">
-                      <option selected>New York</option>
-                      <option value="1">Oregon</option>
-                      <option value="2">DC</option>
-                    </select>
-                    <label for="floatingSelect">State</label>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingZip" placeholder="Zip">
-                    <label for="floatingZip">Zip</label>
-                  </div>
+                <div class="mb-3">
+                  <label for="duration" class="form-label">Course Duration</label>
+                  <input type="text" class="form-control" name="duration" required>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <button type="submit" class="btn btn-primary"><i class="bi bi-journal-plus pe-3"></i>Add Course</button>
                 </div>
-              </form><!-- End floating Labels Form -->
-            </div>
-          </div>
-        </div>
+              </form>
       </div>
     </section>
-
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-<?php require '../include/footer.php';
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

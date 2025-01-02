@@ -8,64 +8,62 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
-
+              <h1 class="text-center">Manage Course</h1>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th>
-                      <b>N</b>ame
-                    </th>
-                    <th>Ext.</th>
-                    <th>City</th>
-                    <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
-                    <th>Completion</th>
+                    <th>Id</th>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Manage</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
-                    <td>2005/02/11</td>
-                    <td>37%</td>
-                  </tr>
-                  <tr>
-                    <td>Theodore Duran</td>
-                    <td>8971</td>
-                    <td>Dhanbad</td>
-                    <td>1999/04/07</td>
-                    <td>97%</td>
-                  </tr>
-                  <tr>
-                    <td>Blossom Dickerson</td>
-                    <td>5018</td>
-                    <td>Kempten</td>
-                    <td>2006/11/09</td>
-                    <td>17%</td>
+                  <?php 
+                  #Database Connection
+                  $conn = new mysqli("localhost", "root", "", "lms");
+
+                  #Deleting user through checking id in URL
+                  if(isset($_GET['id'])) {
+                    $delete = "DELETE FROM courses WHERE id = ". $_GET['id'];
+                    if(mysqli_query($conn, $delete)) {
+                      echo "<div class='alert alert-success' role='alert'>Courses Delete Sucessfully!!</div>";
+                    } else {
+                      echo "<div class='alert alert-warning' role='alert'>Failed to delete course</div>";
+                    }
+                  }
+
+                  #Fetch data from database
+                  $users = mysqli_query($conn, "SELECT * FROM courses");
+                  $result = mysqli_fetch_all($users, MYSQLI_ASSOC);
+
+                  foreach ($result as $user) {
+                      echo "
+                        <tr>
+                          <td>{$user['id']}</td>
+                          <td>{$user['title']}</td>
+                          <td>{$user['description']}</td>
+                          <td>{$user['duration']}</td>
+                          <td>
+                            <a href='edit.php?id={$user['id']}' class='btn btn-success'>Update Course</a>
+                            <a href='index.php?id={$user['id']}' class='btn btn-danger'>Delete Course</a>
+                          </td>
+                        </tr>
+                      ";
+                  }
+                  #connection close 
+                  $conn -> close();
+                  ?> 
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
-
             </div>
           </div>
 
@@ -74,4 +72,4 @@
     </section>
 
   </main><!-- End #main -->
-  <?php require '../include/footer.php'; ?>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -1,5 +1,3 @@
-<?php require 'config/db.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +31,6 @@
 
   <main>
     <div class="container">
-
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
@@ -46,19 +43,25 @@
                 </a>
               </div>
               <?php 
+              #Database Connection
+              $conn = new mysqli("localhost", "root", "", "lms");
+              session_start();
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $name = $_POST["name"];
-                    $uname = $_POST["username"];
-                    $eamil = $_POST["email"];
-                    $password = $_POST["password"];
+                    $name = htmlspecialchars($_POST["name"]);
+                    $uname = htmlspecialchars($_POST["username"]);
+                    $eamil = htmlspecialchars($_POST['email']);
+                    $password = htmlspecialchars($_POST["password"]);
                     $role = $_POST["role"];
 
-
-                    //validation the form
+                    #validation the form
                     if(!empty($name) && !empty($uname) && !empty($password) && !empty($role)) {
-                      $Epassword = password_hash($password, PASSWORD_BCRYPT);         //Encrypt the password
-                      $insert = "INSERT INTO users(name, username,email,  password, role) VALUES('$name', '$uname', '$eamil' ,'$Epassword', '$role')";
+                      #Encrypt the password
+                      $Epassword = password_hash($password, PASSWORD_BCRYPT);         
+                      $insert = "INSERT INTO users(name, username, email, password, role) VALUES('$name', '$uname', '$eamil' ,'$Epassword', '$role')";
                       if(mysqli_query($conn, $insert)) {
+                        $_SESSION['name'] = $name;
+                        $_SESSION['email'] = $eamil;
+                        $_SESSION['role'] = $role;
                           ?>
                           <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Register Sucessfully!
@@ -84,9 +87,7 @@
               ?>
 
               <div class="card mb-3">
-
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                     <p class="text-center small">Enter your personal details to create account</p>

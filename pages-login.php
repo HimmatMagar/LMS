@@ -1,6 +1,4 @@
 
-<?php require 'config/db.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,13 +50,15 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
                   <?php 
+                  #database connection
+                  $conn = new mysqli("localhost", "root", "", "lms");
                     if(isset($_POST['save'])) {
-                      //user's input
                       $username = $_POST['username'];
                       $password = $_POST['password'];
 
-                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' "); // select the username form database
-                      $user = mysqli_fetch_array($select); // fetching a row from select variable
+                      #Fetching a username form database
+                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' ");
+                      $user = mysqli_fetch_array($select);
                       
                       if($user) {
                         if(password_verify($password, $user['password'])) {
@@ -87,6 +87,8 @@
                         setcookie('Username', $username, time() + 86400, "/"); //86400 = 1 day
                       }
                     }
+
+                    #connection close
                     $conn -> close();
                   ?>
                   <form class="row g-3 needs-validation"

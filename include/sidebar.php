@@ -13,31 +13,29 @@
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="create.php">
-              <i class="bi bi-circle"></i><span>Create New User</span>
+            <i class="bi bi-journal-plus" style="font-size: 1.2rem"></i><span>Add Course</span>
             </a>
           </li>
           <li>
             <a href="index.php">
-            <i class="bi bi-person-fill-add" style="font-size: 1.2rem"></i><span>Add User</span>
+            <i class="bi bi-person-fill-add" style="font-size: 1.2rem"></i><span>Manage Course</span>
             </a>
-          </li>x
+          </li>
+          <li>
+            <a href="edit.php">
+            <i class="bi bi-journals" style="font-size: 1.2rem"></i></i><span>Edit Course</span>
+            </a>
+          </li>
         </ul>
       </li>
       
-      <li class="nav-heading">Pages</li>
+      <li class="nav-heading">Setting</li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="users-profile.php">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
       </li>
-
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li>End Contact Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.php">
@@ -52,7 +50,6 @@
           <span>Login</span>
         </a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-error-404.html">
           <i class="bi bi-dash-circle"></i>
@@ -60,5 +57,4 @@
         </a>
       </li>
     </ul>
-
   </aside>
