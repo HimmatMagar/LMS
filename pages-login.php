@@ -54,8 +54,8 @@
                   $conn = new mysqli("localhost", "root", "", "lms");
 
                     if(isset($_POST['save'])) {
-                      $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-                      $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+                      $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                      $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                       #Fetching a username form database
                       $select = mysqli_query($conn, "SELECT FROM users WHERE username = '$username' ");
@@ -66,13 +66,13 @@
                           echo "<div class='alert alert-sucess'>Login sucessfully!</div>";
                           header("Location: index.php");
                           exit;
-                          // if($user['role'] == 'admin') {
-                          //   header("Location: adminDashboard.php");
-                          //   exit;
-                          // } else {
-                          //   header("Location: studentDashboard.php");
-                          //   exit;
-                          // }
+                          if($user['role'] == 'admin') {
+                            header("Location: index.php");
+                            exit;
+                          } else {
+                            header("Location: student_dashboard.php");
+                            exit;
+                          }
                         } else {
                           echo "<div class='alert alert-warning'>Incorrect Password</div>";
                         }

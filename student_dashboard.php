@@ -48,11 +48,12 @@
 <?php require 'include/header.php'; ?>
 
   <!-- ======= Sidebar ======= -->
-<?php require 'include/sidebar.php'; ?>
+<?php require 'layout/sidebarForStudent.php'; ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle d-flex justify-content-between">
+      <h1></h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -62,74 +63,11 @@
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-                <div class="card-body">
-                  <h5 class="card-title">Popular course</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-book"></i>
-                    </div>
-                    <div class="ps-3">
-                      <!-- <h6>145</h6> -->
-                      <span class="text-success small pt-1 fw-bold">Javascript For Beginner</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Total Courses</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-mortarboard-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>10</h6>
-                      <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Total Students</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>30</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Customers Card -->
-
-            <!-- Recent Sales -->
+            <!-- All course -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
-
                 <div class="card-body">
-                  <h1 class="text-center">Your Course</h1>
+                  <h1 class="text-center">All Courses</h1>
                   <div class="row">
                   <?php 
                         $conn = new mysqli("localhost", "root", "", "lms");
@@ -150,15 +88,43 @@
                     ?>
                   </div>
                 </div>
-
               </div>
-            </div><!-- End Recent Sales -->
+            </div><!-- End All course -->
 
+             <!-- Top Selling Courses -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h1 class="text-center">Top selling Courses</h1>
+                  <div class="row">
+                  <?php 
+                        $conn = new mysqli("localhost", "root", "", "lms");
+
+                        $fetch = mysqli_query($conn, "SELECT * FROM courses");
+                        $courseDir = mysqli_fetch_all($fetch, MYSQLI_ASSOC);
+
+                        foreach ($courseDir as $course) {
+                            if($course['duration'] >= 20) {
+                              echo "<div class='col-md-4'>
+                            <div class='course-card d-flex flex-column p-3 border' style='min-height: 250px;'>
+                                <h3>" . $course['title'] . "</h3>
+                                <p>" . $course['description'] . "</p>
+                                <p>Duration: " . $course['duration'] . "</p>
+                                <a href='enrollement.php?id={$course['id']}' class='btn btn-info'>Enroll Now</a>
+                                </div>
+                              </div>";
+                            }
+                        }
+                    ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- End Top Selling Courses -->
           </div>
-        </div><!-- End Left side columns -->
+        </div>
       </div>
     </section>
-
   </main><!-- End #main -->
   <!-- ======= Footer ======= -->
 <?php require 'include/footer.php'; ?>

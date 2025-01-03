@@ -51,7 +51,7 @@
                     $uname = htmlspecialchars($_POST["username"]);
                     $eamil = htmlspecialchars($_POST['email']);
                     $password = htmlspecialchars($_POST["password"]);
-                    $role = filter_var($_POST["role"], FILTER_SANITIZE_STRING);
+                    $role = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                     #validation the form
                     if(!empty($name) && !empty($uname) && !empty($password) && !empty($role)) {

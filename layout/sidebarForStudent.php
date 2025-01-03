@@ -12,23 +12,13 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="create.php">
-            <i class="bi bi-journal-plus" style="font-size: 1.2rem"></i><span>Add Course</span>
+            <a href="#">
+            <i class="bi bi-book" style="font-size: 1.2rem"></i><span>Enrolled Course</span>
             </a>
           </li>
           <li>
-            <a href="tableData.php">
-            <i class="bi bi-person-fill-add" style="font-size: 1.2rem"></i><span>Manage Course</span>
-            </a>
-          </li>
-          <li>
-            <a href="edit.php">
-            <i class="bi bi-journals" style="font-size: 1.2rem"></i><span>Edit Course</span>
-            </a>
-          </li>
-          <li>
-            <a href="student.php">
-            <i class="bi bi-people-fill" style="font-size: 1.2rem"></i><span>Manage Student</span>
+            <a href="student_dashboard.php">
+            <i class="bi bi-binoculars-fill" style="font-size: 1.2rem"></i><span>View available Course</span>
             </a>
           </li>
         </ul>
