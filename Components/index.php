@@ -22,6 +22,7 @@
                     <th>Course Name</th>
                     <th>Description</th>
                     <th>Duration</th>
+                    <th>Course File</th>
                     <th>Manage</th>
                   </tr>
                 </thead>
@@ -51,6 +52,7 @@
                           <td>{$user['title']}</td>
                           <td>{$user['description']}</td>
                           <td>{$user['duration']}</td>
+                          <td>{$user['file_link']}</td>
                           <td>
                             <a href='edit.php?id={$user['id']}' class='btn btn-success'>Update Course</a>
                             <a href='index.php?id={$user['id']}' class='btn btn-danger'>Delete Course</a>

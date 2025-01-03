@@ -42,7 +42,7 @@
                   <img src="assets/img/logo.png" alt="">
                   <span class="d-none d-lg-block">LMS</span>
                 </a>
-              </div><!-- End Logo -->
+              </div>
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="pt-4 pb-2">
@@ -52,12 +52,13 @@
                   <?php 
                   #database connection
                   $conn = new mysqli("localhost", "root", "", "lms");
+
                     if(isset($_POST['save'])) {
-                      $username = $_POST['username'];
-                      $password = $_POST['password'];
+                      $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+                      $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
                       #Fetching a username form database
-                      $select = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' ");
+                      $select = mysqli_query($conn, "SELECT FROM users WHERE username = '$username' ");
                       $user = mysqli_fetch_array($select);
                       
                       if($user) {
@@ -81,9 +82,9 @@
                         exit;
                       }
 
-                      // Set the cookie for 'Remember Me' functionality
+                      # Set the cookie for 'Remember Me' functionality
                       if(isset($_COOKIE['remember'])) {
-                        // Use the HttpOnly and Secure flags for cookie security
+                        # Use the HttpOnly and Secure flags for cookie security
                         setcookie('Username', $username, time() + 86400, "/"); //86400 = 1 day
                       }
                     }
