@@ -14,23 +14,28 @@
       <i class="bi bi-menu-button-wide"></i><span>Courses</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <li>
+        <a href="courses/addCategory.php">
+        <i class="bi bi-cloud-plus-fill" style="font-size: 1rem;"></i><span>Add Category</span>
+        </a>
+      </li>
       <li>
-        <a href="components-alerts.html">
+        <a href="courses/addCourse.php">
         <i class="bi bi-folder-plus" style="font-size: 1rem;"></i><span>Add Course</span>
         </a>
       </li>
       <li>
-        <a href="components-accordion.html">
+        <a href="courses/editCourse.php">
           <i class="bi bi-pencil-square" style="font-size: 1rem;"></i><span>Edit Course</span>
         </a>
       </li>
       <li>
-        <a href="components-badges.html">
-        <i class="bi bi-eyeglasses" style="font-size: 1rem;"></i><span>Read Course</span>
+        <a href="courses/courseInfo.php">
+        <i class="bi bi-eyeglasses" style="font-size: 1rem;"></i><span>Courses Info</span>
         </a>
       </li>
       <li>
-        <a href="components-badges.html">
+        <a href="courses/deleteCourse.php">
         <i class="bi bi-trash" style="font-size: 1rem;"></i><span>Delete Course</span>
         </a>
       </li>
@@ -43,7 +48,7 @@
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="forms-elements.html">
+        <a href="student/studentInfo.php">
         <i class="bi bi-eyeglasses" style="font-size: 1rem;"></i><span>Student Info</span>
         </a>
       </li>

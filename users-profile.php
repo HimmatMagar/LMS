@@ -1,4 +1,33 @@
-<?php include 'layout/head.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
 <?php include 'layout/nav.php'; ?>
 <?php include 'layout/sidebar.php'; ?>
 
@@ -23,13 +52,17 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <?php
-            $conn = new mysqli("localhost", 'root', '', 'lms');
-            $sql = mysqli_query($conn, "SELECT * FROM userinfo");
-            $user = mysqli_fetch_assoc($sql);
+            // $conn = new mysqli("localhost", 'root', '', 'lms');
+            // $sql = mysqli_query($conn, "SELECT * FROM userinfo");
+            // $user = mysqli_fetch_assoc($sql);
             ?>
 
-              <img src="images/<?php echo $user['img'] ?>" alt="Profile" class="rounded-circle">
-              <h2><?php echo $user['name'] ?></h2>
+              <img src="images/<?php 
+              // echo $user['img'] 
+              ?>" alt="Profile" class="rounded-circle">
+              <h2><?php 
+              // echo $user['name'] 
+              ?></h2>
               
             </div>
           </div>
@@ -64,33 +97,45 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
-                  <p class="small fst-italic"><?php echo $user['description'] ?></p>
+                  <p class="small fst-italic"><?php 
+                  // echo $user['description']
+                  ?></p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user['name'] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    // echo $user['name']
+                    ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date of Birth</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user['dob'] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    // echo $user['dob']
+                    ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user['address'] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    // echo $user['address']
+                    ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user['phone'] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    // echo $user['phone']
+                    ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user['email'] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    // echo $user['email']
+                    ?></div>
                   </div>
 
                 </div>
@@ -100,50 +145,50 @@
                   <!-- Profile Edit Form -->
                   <form method="POST" enctype="multipart/form-data">
                     <?php 
-                      $conn = new mysqli('localhost', 'root', '', 'lms');
+                      // $conn = new mysqli('localhost', 'root', '', 'lms');
 
-                      if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $file = $_FILES['dataFile']['name'];
-                        $fileTmpName = $_FILES['dataFile']['tmp_name'];
-                        $fileSize = $_FILES['dataFile']['size'];
+                      // if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                      //   $file = $_FILES['dataFile']['name'];
+                      //   $fileTmpName = $_FILES['dataFile']['tmp_name'];
+                      //   $fileSize = $_FILES['dataFile']['size'];
 
-                        $explode = explode('.', $file);
-                        $firstName = strtolower($explode[0]);
-                        $typeExt = strtolower(end($explode));
-                        $uniqueName = $firstName . "_" . time() . "." . $typeExt;
+                      //   $explode = explode('.', $file);
+                      //   $firstName = strtolower($explode[0]);
+                      //   $typeExt = strtolower(end($explode));
+                      //   $uniqueName = $firstName . "_" . time() . "." . $typeExt;
 
-                        $name = $_POST['fullName'];
-                        $about = $_POST['description'];
-                        $email = $_POST['email'];
-                        $dob = $_POST['dob'];
-                        $phone = $_POST['phone'];
-                        $address = $_POST['address'];
+                      //   $name = $_POST['fullName'];
+                      //   $about = $_POST['description'];
+                      //   $email = $_POST['email'];
+                      //   $dob = $_POST['dob'];
+                      //   $phone = $_POST['phone'];
+                      //   $address = $_POST['address'];
 
-                        if(!empty($name) && !empty($about) && !empty($address) && !empty($dob) && !empty($phone) && !empty($email)) {
-                          if($fileSize <= 1024 * 1024 * 5) {
-                            if(in_array($typeExt, ['png', 'jpg', 'jpeg'])) {
-                              if(move_uploaded_file($fileTmpName, "images/" . $uniqueName)) {
-                                $query = mysqli_query($conn, "INSERT INTO userinfo(img, name, description, email, dob, phone, address)
-                                VALUES('$uniqueName', '$name', '$about', '$email', '$dob', '$phone', '$address')");
-                                if($query) {
-                                  echo "<div class='alert alert-info'>Profile uploaded sucessfully!</div>";
-                                } else {
-                                  echo "<div class='alert alert-warning'>Database Error!!!</div>";
-                                }
-                              } else {
-                                echo "<div class='alert alert-warning'>Failed to move a file</div>";
-                              }
-                            } else {
-                              echo "<div class='alert alert-warning'>Image must be png, jpg & jpeg formate</div>";
-                            }
-                          } else {
-                            echo "<div class='alert alert-warning'>Image size must be 5MB!</div>";
-                          }
-                        } else {
-                          echo "<div class='alert alert-warning'>All fields are required</div>";
-                        }
+                      //   if(!empty($name) && !empty($about) && !empty($address) && !empty($dob) && !empty($phone) && !empty($email)) {
+                      //     if($fileSize <= 1024 * 1024 * 5) {
+                      //       if(in_array($typeExt, ['png', 'jpg', 'jpeg'])) {
+                      //         if(move_uploaded_file($fileTmpName, "images/" . $uniqueName)) {
+                      //           $query = mysqli_query($conn, "INSERT INTO userinfo(img, name, description, email, dob, phone, address)
+                      //           VALUES('$uniqueName', '$name', '$about', '$email', '$dob', '$phone', '$address')");
+                      //           if($query) {
+                      //             echo "<div class='alert alert-info'>Profile uploaded sucessfully!</div>";
+                      //           } else {
+                      //             echo "<div class='alert alert-warning'>Database Error!!!</div>";
+                      //           }
+                      //         } else {
+                      //           echo "<div class='alert alert-warning'>Failed to move a file</div>";
+                      //         }
+                      //       } else {
+                      //         echo "<div class='alert alert-warning'>Image must be png, jpg & jpeg formate</div>";
+                      //       }
+                      //     } else {
+                      //       echo "<div class='alert alert-warning'>Image size must be 5MB!</div>";
+                      //     }
+                      //   } else {
+                      //     echo "<div class='alert alert-warning'>All fields are required</div>";
+                      //   }
 
-                      }
+                      // }
 
                     ?>
                     <div class="row mb-3">

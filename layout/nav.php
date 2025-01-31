@@ -1,8 +1,8 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.html" class="logo d-flex align-items-center">
-    <img src="assets/img/logo.png" alt="" style="width: 90px; object-fit: cover;">
+  <a href="index.php" class="logo d-flex align-items-center">
+    <img src="../assets/img/logo.png" alt="" style="width: 90px; object-fit: cover;">
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
@@ -180,7 +180,9 @@
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
-          <h6><?php echo $user['name'] ?></h6>
+          <h6><?php
+          // echo $user['name']
+          ?></h6>
         </li>
         <li>
           <hr class="dropdown-divider">
