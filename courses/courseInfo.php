@@ -46,11 +46,10 @@
                             echo "<td>" . $course['description'] . "</td>";
                             echo "<td>" . $course['img'] . "</td>";
                             echo "<td>" . $course['duration'] . "</td>";
-                            echo "<td><a href='editCourse.php?id=" . $course['id'] .
-                            "' class='btn btn-primary'>Edit</a> <a href='delete-course.php?id
-                            =" . $course['id'] .
-                            "' class='btn btn-danger'>Delete</a></td>";
-                            echo "</tr>";
+                            echo "<td>
+                                <a href='editCourse.php?id={$course['id']}' class='btn btn-primary'>Edit</a>
+                                <a href='courseInfo.php?id={$course['id']}' class='btn btn-danger'>Delete</a>
+                            </td>";
                             }
                             $conn -> close();
                     ?>

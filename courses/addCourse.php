@@ -16,10 +16,11 @@
                 }
 
                 $query = mysqli_query($conn, "SELECT * FROM categories");
-                $sql = mysqli_fetch_assoc($query);
+                $sql = mysqli_fetch_all($query, MYSQLI_ASSOC);
+                foreach ($sql as $id) {}
 
                 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $category = $sql['id'];
+                    $category = $id['id'];
                     $title = $_POST['title'];
                     $description = $_POST['description'];
 
