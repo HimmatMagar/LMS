@@ -168,20 +168,20 @@
     <li class="nav-item dropdown pe-3">
 
           <?php
-            // $conn = new mysqli("localhost", 'root', '', 'lms');
-            // $sql = mysqli_query($conn, "SELECT * FROM userinfo");
-            // $user = mysqli_fetch_assoc($sql);
+            $conn = new mysqli("localhost", 'root', '', 'lms');
+            $sql = mysqli_query($conn, "SELECT * FROM userinfo");
+            $user = mysqli_fetch_assoc($sql);
             ?>
 
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-        <img src="images/" alt="Profile" class="rounded-circle">
+        <img src="images/<?php echo $user['img'] ?>" alt="Profile" class="rounded-circle">
         <span class="d-none d-md-block dropdown-toggle ps-2"></span>
       </a><!-- End Profile Iamge Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
           <h6><?php
-          // echo $user['name']
+          echo $user['name']
           ?></h6>
         </li>
         <li>

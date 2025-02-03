@@ -10,7 +10,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Id</th>
                         <th>Category</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -44,7 +44,7 @@
                             echo "<td>" . $course['ctg_name'] . "</td>";
                             echo "<td>" . $course['title'] . "</td>";
                             echo "<td>" . $course['description'] . "</td>";
-                            echo "<td>" . $course['img'] . "</td>";
+                            echo "<td><img src='upload/{$course['img']}' /></td>";
                             echo "<td>" . $course['duration'] . "</td>";
                             echo "<td>
                                 <a href='editCourse.php?id={$course['id']}' class='btn btn-primary'>Edit</a>

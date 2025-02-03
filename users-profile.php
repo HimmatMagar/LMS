@@ -52,16 +52,16 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <?php
-            // $conn = new mysqli("localhost", 'root', '', 'lms');
-            // $sql = mysqli_query($conn, "SELECT * FROM userinfo");
-            // $user = mysqli_fetch_assoc($sql);
+            $conn = new mysqli("localhost", 'root', '', 'lms');
+            $sql = mysqli_query($conn, "SELECT * FROM userinfo");
+            $user = mysqli_fetch_assoc($sql);
             ?>
 
               <img src="images/<?php 
-              // echo $user['img'] 
+              echo $user['img'] 
               ?>" alt="Profile" class="rounded-circle">
               <h2><?php 
-              // echo $user['name'] 
+              echo $user['name'] 
               ?></h2>
               
             </div>
@@ -81,7 +81,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Add Profile</button>
                 </li>
 
                 <li class="nav-item">
@@ -98,7 +98,7 @@
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
                   <p class="small fst-italic"><?php 
-                  // echo $user['description']
+                  echo $user['description']
                   ?></p>
 
                   <h5 class="card-title">Profile Details</h5>
@@ -106,89 +106,87 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
                     <div class="col-lg-9 col-md-8"><?php 
-                    // echo $user['name']
+                    echo $user['name']
                     ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date of Birth</div>
                     <div class="col-lg-9 col-md-8"><?php 
-                    // echo $user['dob']
+                    echo $user['dob']
                     ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
                     <div class="col-lg-9 col-md-8"><?php 
-                    // echo $user['address']
+                    echo $user['address']
                     ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
                     <div class="col-lg-9 col-md-8"><?php 
-                    // echo $user['phone']
+                    echo $user['phone']
                     ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8"><?php 
-                    // echo $user['email']
+                    echo $user['email']
                     ?></div>
                   </div>
-
                 </div>
-
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
                   <form method="POST" enctype="multipart/form-data">
                     <?php 
-                      // $conn = new mysqli('localhost', 'root', '', 'lms');
+                      $conn = new mysqli('localhost', 'root', '', 'lms');
 
-                      // if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                      //   $file = $_FILES['dataFile']['name'];
-                      //   $fileTmpName = $_FILES['dataFile']['tmp_name'];
-                      //   $fileSize = $_FILES['dataFile']['size'];
+                      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $file = $_FILES['dataFile']['name'];
+                        $fileTmpName = $_FILES['dataFile']['tmp_name'];
+                        $fileSize = $_FILES['dataFile']['size'];
 
-                      //   $explode = explode('.', $file);
-                      //   $firstName = strtolower($explode[0]);
-                      //   $typeExt = strtolower(end($explode));
-                      //   $uniqueName = $firstName . "_" . time() . "." . $typeExt;
+                        $explode = explode('.', $file);
+                        $firstName = strtolower($explode[0]);
+                        $typeExt = strtolower(end($explode));
+                        $uniqueName = $firstName . "_" . time() . "." . $typeExt;
 
-                      //   $name = $_POST['fullName'];
-                      //   $about = $_POST['description'];
-                      //   $email = $_POST['email'];
-                      //   $dob = $_POST['dob'];
-                      //   $phone = $_POST['phone'];
-                      //   $address = $_POST['address'];
+                        $name = $_POST['fullName'];
+                        $about = $_POST['description'];
+                        $email = $_POST['email'];
+                        $dob = $_POST['dob'];
+                        $phone = $_POST['phone'];
+                        $address = $_POST['address'];
 
-                      //   if(!empty($name) && !empty($about) && !empty($address) && !empty($dob) && !empty($phone) && !empty($email)) {
-                      //     if($fileSize <= 1024 * 1024 * 5) {
-                      //       if(in_array($typeExt, ['png', 'jpg', 'jpeg'])) {
-                      //         if(move_uploaded_file($fileTmpName, "images/" . $uniqueName)) {
-                      //           $query = mysqli_query($conn, "INSERT INTO userinfo(img, name, description, email, dob, phone, address)
-                      //           VALUES('$uniqueName', '$name', '$about', '$email', '$dob', '$phone', '$address')");
-                      //           if($query) {
-                      //             echo "<div class='alert alert-info'>Profile uploaded sucessfully!</div>";
-                      //           } else {
-                      //             echo "<div class='alert alert-warning'>Database Error!!!</div>";
-                      //           }
-                      //         } else {
-                      //           echo "<div class='alert alert-warning'>Failed to move a file</div>";
-                      //         }
-                      //       } else {
-                      //         echo "<div class='alert alert-warning'>Image must be png, jpg & jpeg formate</div>";
-                      //       }
-                      //     } else {
-                      //       echo "<div class='alert alert-warning'>Image size must be 5MB!</div>";
-                      //     }
-                      //   } else {
-                      //     echo "<div class='alert alert-warning'>All fields are required</div>";
-                      //   }
+                        if(!empty($name) && !empty($about) && !empty($address) && !empty($dob) && !empty($phone) && !empty($email)) {
+                          if($fileSize <= 1024 * 1024 * 5) {
+                            if(in_array($typeExt, ['png', 'jpg', 'jpeg'])) {
+                              if(move_uploaded_file($fileTmpName, "images/" . $uniqueName)) {
+                                $query = mysqli_query($conn, "INSERT INTO userinfo(img, name, description, email, dob, phone, address)
+                                VALUES('$uniqueName', '$name', '$about', '$email', '$dob', '$phone', '$address')");
+                                if($query) {
+                                  echo "<div class='alert alert-info'>Profile uploaded sucessfully!</div>";
+                                } else {
+                                  echo "<div class='alert alert-warning'>Database Error!!!</div>";
+                                }
+                              } else {
+                                echo "<div class='alert alert-warning'>Failed to move a file</div>";
+                              }
+                            } else {
+                              echo "<div class='alert alert-warning'>Image must be png, jpg & jpeg formate</div>";
+                            }
+                          } else {
+                            echo "<div class='alert alert-warning'>Image size must be 5MB!</div>";
+                          }
+                        } else {
+                          echo "<div class='alert alert-warning'>All fields are required</div>";
+                        }
 
-                      // }
+                      }
 
                     ?>
                     <div class="row mb-3">

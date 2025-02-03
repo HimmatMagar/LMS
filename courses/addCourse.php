@@ -31,13 +31,13 @@
                     $explode = explode('.', $img);
                     $firstName = strtolower($explode[0]);
                     $type = strtolower(end($explode));
-                    $imgName = $firstName . '_' . time() . "." . $type;
+                    $imgName = $firstName ."." . $type;
 
                     $duration = $_POST['duration'];
                     
                     if(!empty($title) && !empty($description) && !empty($duration)) {
                         if($size <= 1024 * 1024 * 5) {
-                            if(in_array($type, ['jpg', 'jpeg', 'png', 'gif'])) {
+                            if(in_array($type, ['jpg', 'jpeg', 'png', 'avif'])) {
                                 if(move_uploaded_file($tmp, 'upload/' . $imgName)) {
                                     $sql = mysqli_query($conn, "INSERT INTO courses(ctg_id, title, description, img, duration) VALUES ('$category', '$title', '$description', '$imgName', '$duration')");
                                     if($sql) {
